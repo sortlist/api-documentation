@@ -4,7 +4,7 @@
 
 The goal of this page is to define the high level architecture of the Milkyway API that will allow matching agencies (called here entities) using Milkyway network.
 
-
+<!-- POPULATE ENDPOINT DOC -->
 ## **Populate endpoint** 
 **Create new entity with skills on a specific environment**
 
@@ -42,21 +42,27 @@ curl --header "Content-Type: application/json" \
 
 ### Http Request
 
-**`PUT http://milkyway.sortlist.com/v1/<ENVIRONMENT>/entities/<ENTITY_ID>`**
+`PUT http://milkyway.sortlist.com/v1/`**`environment`**`/entities/`**`entity_id`**
 
 ### Path Parameters
 
 Parameter | Necessary | Type | Description
 --------- | -------- | ------- | -----------
-**`<ENTITY_ID>`** | `yes` | `string` | `ID (slug) of the entity`
-**`<ENVIRONMENT>`** | `yes` | `string` | `Environment in which you want to store data staging/prod`
+**`environment`** | `yes` | `string` | `Environment in which you want to store data staging/prod`
+**`entity_id`** | `yes` | `string` | `ID (slug) of the entity`
 
 ### Query Parameters
 
 **`This endpoint does not use query parameters`**
 
+### Arguments
+
+Argument | Necessary | Type | Description
+--------- | -------- | ------- | -----------
+**`id`** | `no` | `string` | `ID (slug) of the entity`
+**`skills`** | `yes` | `list(string)` | `List of entity's skills`
 ### Description
-Endpoint specialized in adding a new agency (entity) in the Milkyway API's database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.
+Endpoint specialized in adding a new agency (entity) in the Milkyway API's database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.  
 For each skill (input skill) from the list given in the request's body:
 
 * Create a new entry (entry_id, environment, entity_skill) in table `mw_entity_skills`:
@@ -76,19 +82,69 @@ This entry represents the **link between an entity and its entity skill**.
 
 This entry represents the **link between a entity skill and a milkyway skill**.
 
-## Errors
-The Milkyway API uses the following error codes:
+<!-- MATCHING ENDPOINT DOC -->
+## **Matching endpoint** 
 
-Error Code | Meaning
----------- | -------
-400 | Bad Request -- Your request is invalid.
-401 | Unauthorized -- Your API key is wrong.
-403 | Forbidden -- The kitten requested is hidden for administrators only.
-404 | Not Found -- The specified kitten could not be found.
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method.
-406 | Not Acceptable -- You requested a format that isn't json.
-410 | Gone -- The kitten requested has been removed from our servers.
-418 | I'm a teapot.
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
+<aside class="warning">
+Bearer token needed for authentification!
+</aside>
+
+>Shell command:
+
+```shell
+curl --header "Content-Type: application/json" \
+ --header "Authorization: Bearer <ACCESS_TOKEN>"\
+ --request GET \
+ http://milkyway.sortlist.com/v1/<environment>/matches?skills[]=<skill_1>&skills[]=<skill_2>
+```
+>The above command returns JSON structured like this:
+
+```shell
+[
+  {
+      "entity_id": "echoua",
+      "score": 0.32
+  },
+  {
+      "entity_id": "mtd-creative-designs",
+      "score": 0.16
+  }
+]
+```
+
+### Http Request
+
+`GET http://milkyway.sortlist.com/v1/`**`environment`**`/matches?`**`skills[]`**`=<skill_1>&`**`skills[]`**`=<skill_2>`
+
+### Path Parameters
+
+Parameter | Necessary | Type | Description
+--------- | -------- | ------- | -----------
+**`environment`** | `yes` | `string` | `Environment in which you want to store data staging/prod`
+
+### Query Parameters
+
+Query parameter | Necessary | Type | Description
+--------- | -------- | ------- | -----------
+**`skills[]`** | `yes` | `string` | `Input skills`
+
+
+### Description
+Endpoint specialized in matching input skills with entities that exists in Milkyway API™ DB. A list of entities will be returned containing entity’s id and a matching score. 
+
+
+**Steps:**
+
+<!-- * Retrieve network skeleton from MW using list of N input skills (query params)  
+
+* Fulfil the network skeleton with entities.Considering the list of N input skills, MW will return a skeleton:
+
+* For each entity skill returns the 
+  1. **entity_skill** : agency skill slug (input skill)
+  2. **milkyway_skill** : is the best match of the input skill in the MW skills space. This is done using fuzzy matching.
+      * `entity skill`		<=>	 	`milkyway_skill`
+      * (database relation :  many (*) to one (1) )
+
+
+This entry represents the **link between a entity skill and a milkyway skill**. -->
+
