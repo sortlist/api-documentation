@@ -135,16 +135,53 @@ Endpoint specialized in matching input skills with entities that exists in Milky
 
 **Steps:**
 
-<!-- * Retrieve network skeleton from MW using list of N input skills (query params)  
+* Retrieve a skeleton from MW using list of N input skills (query params)  
 
-* Fulfil the network skeleton with entities.Considering the list of N input skills, MW will return a skeleton:
+> SKELETON STRUCTURE  
 
-* For each entity skill returns the 
-  1. **entity_skill** : agency skill slug (input skill)
-  2. **milkyway_skill** : is the best match of the input skill in the MW skills space. This is done using fuzzy matching.
-      * `entity skill`		<=>	 	`milkyway_skill`
-      * (database relation :  many (*) to one (1) )
+```shell
+[
+  <PARENT NODE NAME FOR SKILL_1>: {   
+    'level_1': [  
+      { 'name': <milkyway skill>  
+        'seachable_name': <milkyway skill>  
+        'agencies': []  
+      }
+      ...
+    ], 
+    'level_2': [  
+      { 'name': <milkyway skill> 
+        'seachable_name': <milkyway skill>
+        'agencies': []  
+      }  
+      ...  
+    ]
+  }
 
+  ...
 
-This entry represents the **link between a entity skill and a milkyway skill**. -->
+  <PARENT NODE NAME FOR SKILL_N>:{
+    'level_1': [  
+      { 'name': <milkyway skill>  
+        'seachable_name': <milkyway skill>  
+        'agencies': []  
+      }
+      ...
+    ], 
+    'level_2': [  
+      { 'name': <milkyway skill> 
+        'seachable_name': <milkyway skill>
+        'agencies': []  
+      }  
+      ...  
+    ]
+  }
+]
+```
 
+* The skeleton represents the relevant skills space for the input skills.
+    1. On the first level (`level_1`), there are milkyway skills that could represent an exact match to the input skill.
+    2. On the second level (`level_2`), there are closest milkyway skills in the skills space related to the input skill.  
+<br>
+* As the network does not know the entities that have one skill or another, skeleton needs to be fulfilled with entities. For each milkyway skill in the skeleton, entities will be retrieved from milkyway database.
+    1. With one milkyway skill, more entity skills will be retrieved using db translations. Then, for each entity skill, entities will be retrieved and added to the skeleton.
