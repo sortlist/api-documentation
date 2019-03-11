@@ -32,7 +32,7 @@ curl --header "Content-Type: application/json" \
  --header "Authorization: Bearer <ACCESS_TOKEN>"\
  --request PUT \
  --data '{"skills": ["<SKILL_1>", "<SKILL_2>", "<SKILL_3>", "<SKILL_4>", "<SKILL_5>", "<SKILL_6>", "<SKILL_7>"]}' \
- http://milkyway.sortlist.com/v1/<ENVIRONMENT>/entities/<ENTITY_ID>
+ https://milkyway.sortlist.com/v1/<ENVIRONMENT>/entities/<ENTITY_ID>
 ```
 >The above command returns JSON structured like this:
 
@@ -69,7 +69,7 @@ Parameter | Necessary | Type | Description
 
 **`This endpoint does not use query parameters`**
 
-### Arguments
+### Body Arguments
 
 Argument | Necessary | Type | Description
 --------- | -------- | ------- | -----------
@@ -109,7 +109,7 @@ Bearer token needed for authentification!
 curl --header "Content-Type: application/json" \
  --header "Authorization: Bearer <ACCESS_TOKEN>"\
  --request GET \
- http://milkyway.sortlist.com/v1/<ENVIRONMENT>/matches?skills[]=<SKILL_1>&skills[]=<SKILL_2>
+ https://milkyway.sortlist.com/v1/<ENVIRONMENT>/matches?skills[]=<SKILL_1>&skills[]=<SKILL_2>
 ```
 >The above command returns JSON structured like this:
 
@@ -199,3 +199,122 @@ Endpoint specialized in matching input skills with entities that exists in Milky
 <br>
 * As the network does not know the entities that have one skill or another, skeleton needs to be fulfilled with entities. For each milkyway skill in the skeleton, entities will be retrieved from milkyway database.
     1. With one milkyway skill, more entity skills will be retrieved using db translations. Then, for each entity skill, entities will be retrieved and added to the skeleton.
+
+<!-- AUTOCOMPLETE ENDPOINT DOC -->
+## **Autocomplete endpoint**
+
+<aside class="warning">
+Bearer token needed for authentification!
+</aside>
+
+
+>Shell command:
+
+```shell
+curl --header "Content-Type: application/json" \
+ --header "Authorization: Bearer <ACCESS_TOKEN>"\
+ --request GET \
+ https://milkyway.sortlist.com/v1/<ENVIRONMENT>/skills?prefix=<PREFIX>&limit=<LIMIT>
+```
+>The above command returns JSON structured like this:
+
+```shell
+[
+  {
+   "skills": [
+       "branding",
+       "brand awareness",
+       "branding identity",
+       "brand design",
+       "brand identity design",
+       "brand guidelines",
+       "brand development",
+       "browser window",
+       "breakpoint",
+       "broadcast production"
+   ]
+  }
+]
+```
+
+### Http Request
+
+`GET https://milkyway.sortlist.com/v1/`**`environment`**`/skills?`**`prefix`**`=<prefix>&`**`limit`**`=<limit>`
+
+### Path Parameters
+
+Parameter | Necessary | Type | Description
+--------- | -------- | ------- | -----------
+**`environment`** | `yes` | `string` | `Environment in which you want to store data staging/prod`
+
+### Query Parameters
+
+Query parameter | Necessary | Default value | Type | Description |
+--------- | -------- | ------------- | ------- | -----------
+**`prefix`** | `yes` | `-` | `string` | `Prefix string for searched skills.`
+**`limit`** | `no` | `10` | `int` | `Prefix string for searched skills.`
+
+### Description
+
+Endpoint specialized in returning milkyway skills starting with a prefix.  
+All the skill nodes will be retrieved from MW and only those starting with the specified query param prefix will be returned.
+
+
+<!-- AUTOSUGGESTENDPOINT DOC -->
+## **Autosuggest endpoint**
+
+<aside class="warning">
+Bearer token needed for authentification!
+</aside>
+
+
+>Shell command:
+
+```shell
+curl --header "Content-Type: application/json" \
+ --header "Authorization: Bearer <ACCESS_TOKEN>"\
+ --request GET \
+ https://milkyway.sortlist.com/v1/<ENVIRONMENT>/suggestions?skills[]=<SKILL_1>&skills[]=<SKILL_2>&limit=10
+```
+>The above command returns JSON structured like this:
+
+```shell
+[
+  {
+   "skills": [
+       "graphic",
+       "javascript",
+       "typography",
+       "framework",
+       "architecture",
+       "application programming interface",
+       "design process",
+       "cascading style sheets",
+       "aesthetic",
+       "client side"
+   ]
+  }
+]
+```
+
+### Http Request
+
+`GET https://milkyway.sortlist.com/v1/`**`environment`**`/suggestions?`**`skills[]`**`=<skill_1>&`**`skills[]`**`=<skill_2>`**`limit`**`=<limit>`
+
+### Path Parameters
+
+Parameter | Necessary | Type | Description
+--------- | -------- | ------- | -----------
+**`environment`** | `yes` | `string` | `Environment in which you want to store data staging/prod`
+
+### Query Parameters
+
+Query parameter | Necessary | Default value | Type | Description |
+--------- | -------- | ------------- | ------- | -----------
+**`skills[]`** | `yes` | `10` | `string` | `Input skills`
+**`limit`** | `no` | `10` | `int` | `Prefix string for searched skills.`
+
+### Description
+
+Endpoint specialized in returning a list of suggested skills based on input skills.  
+Based on an input list of skills, a list of related skills (suggestions) will be retrieved from MW.
