@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,9 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -222,27 +219,27 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#milkyway-api" class="toc-h1 toc-link" data-title="Milkyway API">Milkyway API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#definition" class="toc-h2 toc-link" data-title="Definition">Definition</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#prerequisites" class="toc-h2 toc-link" data-title="Prerequisites">Prerequisites</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#populate-endpoint" class="toc-h2 toc-link" data-title="Populate endpoint"><strong>Populate endpoint</strong></a>
+                  </li>
+                  <li>
+                    <a href="#matching-endpoint" class="toc-h2 toc-link" data-title="Matching endpoint"><strong>Matching endpoint</strong></a>
+                  </li>
+                  <li>
+                    <a href="#autocomplete-endpoint" class="toc-h2 toc-link" data-title="Autocomplete endpoint"><strong>Autocomplete endpoint</strong></a>
+                  </li>
+                  <li>
+                    <a href="#autosuggest-endpoint" class="toc-h2 toc-link" data-title="Autosuggest endpoint"><strong>Autosuggest endpoint</strong></a>
                   </li>
               </ul>
-          </li>
-          <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -253,247 +250,429 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Sortlist API! You can use our API to access Sortlist API endpoints, which can get information on various resources in our APIs.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+        <h1 id='milkyway-api'>Milkyway API</h1>
+<p>Help businesses and entities manage skills, suggestions and matches in one place. Milkyway API&#39;s can help manage multiple skills on multiple environments. You can also automate creating entities and link them to the Milkyway skills space enabling them to be used for matching.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>In Milkyway you connect entities with skills and perform actions like:
+  - Insert/Update an entity into Milkyway (link entity to skills space) | Once inserted, entity will be used for matching algorithm.
+  - Get suggestions of related skills for speciefied skills | Using complex network.
+  - Get autcomplete list of skills for specified prefix.
+  - Get matching entities for specified skills | Using complex network.</p>
+<h2 id='definition'>Definition</h2>
+<p>The goal of this page is to define the high level architecture of the Milkyway API that you can interact with.</p>
+<h2 id='prerequisites'>Prerequisites</h2>
+<p>To be defined...</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<!-- POPULATE ENDPOINT DOC -->
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<p>For example, insert or update a new Entity with skills on a specifict environment with a PUT:</p>
+<h2 id='populate-endpoint'><strong>Populate endpoint</strong></h2>
+<aside class="warning">
+Bearer token needed for authentification!
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<blockquote>
+<p>Shell command:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+ --header <span class="s2">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span><span class="se">\</span>
+ --request PUT <span class="se">\</span>
+ --data <span class="s1">'{"skills": ["&lt;SKILL_1&gt;", "&lt;SKILL_2&gt;", "&lt;SKILL_3&gt;", "&lt;SKILL_4&gt;", "&lt;SKILL_5&gt;", "&lt;SKILL_6&gt;", "&lt;SKILL_7&gt;"]}'</span> <span class="se">\</span>
+ https://milkyway.sortlist.com/v1/&lt;ENVIRONMENT&gt;/entities/&lt;ENTITY_ID&gt;
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+   <span class="s2">"id"</span>: <span class="s2">"entity-id"</span>,
+   <span class="s2">"skills"</span>: <span class="o">[</span>
+       <span class="s2">"&lt;SKILL_1&gt;"</span>,
+       <span class="s2">"&lt;SKILL_2&gt;"</span>,
+       <span class="s2">"&lt;SKILL_3&gt;"</span>,
+       <span class="s2">"&lt;SKILL_4&gt;"</span>,
+       <span class="s2">"&lt;SKILL_5&gt;"</span>,
+       <span class="s2">"&lt;SKILL_6&gt;"</span>,
+       <span class="s2">"&lt;SKILL_7&gt;"</span>
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre>
+<p>All the skills that do not have a value or whose length is larger than 100 characters will be ignored.</p>
+<h3 id='http-request'>Http Request</h3>
+<p><code>PUT http://milkyway.sortlist.com/v1/</code><strong><code>environment</code></strong><code>/entities/</code><strong><code>entity_id</code></strong></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Necessary</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>environment</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>Environment in which you want to store data staging/prod</code></td>
+</tr>
+<tr>
+<td><strong><code>entity_id</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>ID (slug) of the entity</code></td>
+</tr>
+</tbody></table>
 <h3 id='query-parameters'>Query Parameters</h3>
+<p><strong><code>This endpoint does not use query parameters</code></strong></p>
+<h3 id='body-arguments'>Body Arguments</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Argument</th>
+<th>Necessary</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><strong><code>id</code></strong></td>
+<td><code>no</code></td>
+<td><code>string</code></td>
+<td><code>ID (slug) of the entity</code></td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><strong><code>skills</code></strong></td>
+<td><code>yes</code></td>
+<td><code>list(string)</code></td>
+<td><code>List of entity&#39;s skills</code></td>
 </tr>
 </tbody></table>
+<h3 id='description'>Description</h3>
+<p>Endpoint specialized in adding a new agency (entity) in the Milkyway API&#39;s database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.
+For each skill (input skill) from the list given in the request&#39;s body:</p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<ul>
+<li>Create a new entry (entry_id, environment, entity_skill) in table <code>mw_entity_skills</code>:
+
+<ol>
+<li><strong>entity_id</strong> : slug of the entity</li>
+<li><strong>environment</strong> : staging/prod/dev</li>
+<li><strong>entity_skill</strong> : is computed by replacing the whitespaces of an input skill with dash (as an internal normalization)
+
+<ul>
+<li>eg : input skill : <code>engine optimization</code> --&gt; entity_skill : <code>engine_optimization</code></li>
+</ul></li>
+</ol></li>
+</ul>
+
+<p>This entry represents the <strong>link between an entity and its entity skill</strong>.</p>
+
+<ul>
+<li>Create a new entry (entity_skill, milkyway_skill) (called translation) in table <code>mw_entity_skill_translation</code>:
+
+<ol>
+<li><strong>entity_skill</strong> : agency skill slug (input skill)</li>
+<li><strong>milkyway_skill</strong> : is the best match of the input skill in the MW skills space. This is done using fuzzy matching.
+
+<ul>
+<li><code>entity skill</code>      &lt;=&gt;     <code>milkyway_skill</code></li>
+<li>(database relation :  many (*) to one (1) )</li>
+</ul></li>
+</ol></li>
+</ul>
+
+<p>This entry represents the <strong>link between a entity skill and a milkyway skill</strong>.</p>
+
+<!-- MATCHING ENDPOINT DOC -->
+<h2 id='matching-endpoint'><strong>Matching endpoint</strong></h2>
+<aside class="warning">
+Bearer token needed for authentification!
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<blockquote>
+<p>Shell command:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+ --header <span class="s2">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span><span class="se">\</span>
+ --request GET <span class="se">\</span>
+ https://milkyway.sortlist.com/v1/&lt;ENVIRONMENT&gt;/matches?skills[]<span class="o">=</span>&lt;SKILL_1&gt;&amp;skills[]<span class="o">=</span>&lt;SKILL_2&gt;
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+      <span class="s2">"entity_id"</span>: <span class="s2">"echoua"</span>,
+      <span class="s2">"score"</span>: 0.32
+  <span class="o">}</span>,
+  <span class="o">{</span>
+      <span class="s2">"entity_id"</span>: <span class="s2">"mtd-creative-designs"</span>,
+      <span class="s2">"score"</span>: 0.16
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre><h3 id='http-request-2'>Http Request</h3>
+<p><code>GET http://milkyway.sortlist.com/v1/</code><strong><code>environment</code></strong><code>/matches?</code><strong><code>skills[]</code></strong><code>=&lt;skill_1&gt;&amp;</code><strong><code>skills[]</code></strong><code>=&lt;skill_2&gt;</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Necessary</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td><strong><code>environment</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>Environment in which you want to store data staging/prod</code></td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Necessary</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>skills[]</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>Input skills</code></td>
+</tr>
+</tbody></table>
+<h3 id='description-2'>Description</h3>
+<p>Endpoint specialized in matching input skills with entities that exists in Milkyway API™ DB. A list of entities will be returned containing entity’s id and a matching score.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p><strong>Steps:</strong></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<ul>
+<li>Retrieve a skeleton from MW using list of N input skills (query params)</li>
+</ul>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<blockquote>
+<p>SKELETON STRUCTURE</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  &lt;PARENT NODE NAME FOR SKILL_1&gt;: <span class="o">{</span>
+    <span class="s1">'level_1'</span>: <span class="o">[</span>
+      <span class="o">{</span> <span class="s1">'name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'seachable_name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'agencies'</span>: <span class="o">[]</span>
+      <span class="o">}</span>
+      ...
+    <span class="o">]</span>,
+    <span class="s1">'level_2'</span>: <span class="o">[</span>
+      <span class="o">{</span> <span class="s1">'name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'seachable_name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'agencies'</span>: <span class="o">[]</span>
+      <span class="o">}</span>
+      ...
+    <span class="o">]</span>
+  <span class="o">}</span>
+
+  ...
+
+  &lt;PARENT NODE NAME FOR SKILL_N&gt;:<span class="o">{</span>
+    <span class="s1">'level_1'</span>: <span class="o">[</span>
+      <span class="o">{</span> <span class="s1">'name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'seachable_name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'agencies'</span>: <span class="o">[]</span>
+      <span class="o">}</span>
+      ...
+    <span class="o">]</span>,
+    <span class="s1">'level_2'</span>: <span class="o">[</span>
+      <span class="o">{</span> <span class="s1">'name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'seachable_name'</span>: &lt;milkyway skill&gt;
+        <span class="s1">'agencies'</span>: <span class="o">[]</span>
+      <span class="o">}</span>
+      ...
+    <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre>
+<ul>
+<li>The skeleton represents the relevant skills space for the input skills.
+
+<ol>
+<li>On the first level (<code>level_1</code>), there are milkyway skills that could represent an exact match to the input skill.</li>
+<li>On the second level (<code>level_2</code>), there are closest milkyway skills in the skills space related to the input skill.
+<br></li>
+</ol></li>
+<li>As the network does not know the entities that have one skill or another, skeleton needs to be fulfilled with entities. For each milkyway skill in the skeleton, entities will be retrieved from milkyway database.
+
+<ol>
+<li>With one milkyway skill, more entity skills will be retrieved using db translations. Then, for each entity skill, entities will be retrieved and added to the skeleton.</li>
+</ol></li>
+</ul>
+
+<!-- AUTOCOMPLETE ENDPOINT DOC -->
+<h2 id='autocomplete-endpoint'><strong>Autocomplete endpoint</strong></h2>
+<aside class="warning">
+Bearer token needed for authentification!
+</aside>
+
+<blockquote>
+<p>Shell command:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+ --header <span class="s2">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span><span class="se">\</span>
+ --request GET <span class="se">\</span>
+ https://milkyway.sortlist.com/v1/&lt;ENVIRONMENT&gt;/skills?prefix<span class="o">=</span>&lt;PREFIX&gt;&amp;limit<span class="o">=</span>&lt;LIMIT&gt;
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+   <span class="s2">"skills"</span>: <span class="o">[</span>
+       <span class="s2">"branding"</span>,
+       <span class="s2">"brand awareness"</span>,
+       <span class="s2">"branding identity"</span>,
+       <span class="s2">"brand design"</span>,
+       <span class="s2">"brand identity design"</span>,
+       <span class="s2">"brand guidelines"</span>,
+       <span class="s2">"brand development"</span>,
+       <span class="s2">"browser window"</span>,
+       <span class="s2">"breakpoint"</span>,
+       <span class="s2">"broadcast production"</span>
+   <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre><h3 id='http-request-3'>Http Request</h3>
+<p><code>GET https://milkyway.sortlist.com/v1/</code><strong><code>environment</code></strong><code>/skills?</code><strong><code>prefix</code></strong><code>=&lt;prefix&gt;&amp;</code><strong><code>limit</code></strong><code>=&lt;limit&gt;</code></p>
+<h3 id='path-parameters-3'>Path Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Necessary</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td><strong><code>environment</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>Environment in which you want to store data staging/prod</code></td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Query parameter</th>
+<th>Necessary</th>
+<th>Default value</th>
+<th>Type</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td><strong><code>prefix</code></strong></td>
+<td><code>yes</code></td>
+<td><code>-</code></td>
+<td><code>string</code></td>
+<td><code>Prefix string for searched skills.</code></td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td><strong><code>limit</code></strong></td>
+<td><code>no</code></td>
+<td><code>10</code></td>
+<td><code>int</code></td>
+<td><code>Prefix string for searched skills.</code></td>
 </tr>
 </tbody></table>
+<h3 id='description-3'>Description</h3>
+<p>Endpoint specialized in returning milkyway skills starting with a prefix.<br>
+All the skill nodes will be retrieved from MW and only those starting with the specified query param prefix will be returned.</p>
+
+<!-- AUTOSUGGESTENDPOINT DOC -->
+<h2 id='autosuggest-endpoint'><strong>Autosuggest endpoint</strong></h2>
+<aside class="warning">
+Bearer token needed for authentification!
+</aside>
+
+<blockquote>
+<p>Shell command:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+ --header <span class="s2">"Authorization: Bearer &lt;ACCESS_TOKEN&gt;"</span><span class="se">\</span>
+ --request GET <span class="se">\</span>
+ https://milkyway.sortlist.com/v1/&lt;ENVIRONMENT&gt;/suggestions?skills[]<span class="o">=</span>&lt;SKILL_1&gt;&amp;skills[]<span class="o">=</span>&lt;SKILL_2&gt;&amp;limit<span class="o">=</span>10
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="o">[</span>
+  <span class="o">{</span>
+   <span class="s2">"skills"</span>: <span class="o">[</span>
+       <span class="s2">"graphic"</span>,
+       <span class="s2">"javascript"</span>,
+       <span class="s2">"typography"</span>,
+       <span class="s2">"framework"</span>,
+       <span class="s2">"architecture"</span>,
+       <span class="s2">"application programming interface"</span>,
+       <span class="s2">"design process"</span>,
+       <span class="s2">"cascading style sheets"</span>,
+       <span class="s2">"aesthetic"</span>,
+       <span class="s2">"client side"</span>
+   <span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">]</span>
+</code></pre><h3 id='http-request-4'>Http Request</h3>
+<p><code>GET https://milkyway.sortlist.com/v1/</code><strong><code>environment</code></strong><code>/suggestions?</code><strong><code>skills[]</code></strong><code>=&lt;skill_1&gt;&amp;</code><strong><code>skills[]</code></strong><code>=&lt;skill_2&gt;</code><strong><code>limit</code></strong><code>=&lt;limit&gt;</code></p>
+<h3 id='path-parameters-4'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Necessary</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>environment</code></strong></td>
+<td><code>yes</code></td>
+<td><code>string</code></td>
+<td><code>Environment in which you want to store data staging/prod</code></td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Necessary</th>
+<th>Default value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code>skills[]</code></strong></td>
+<td><code>yes</code></td>
+<td><code>10</code></td>
+<td><code>string</code></td>
+<td><code>Input skills</code></td>
+</tr>
+<tr>
+<td><strong><code>limit</code></strong></td>
+<td><code>no</code></td>
+<td><code>10</code></td>
+<td><code>int</code></td>
+<td><code>Prefix string for searched skills.</code></td>
+</tr>
+</tbody></table>
+<h3 id='description-4'>Description</h3>
+<p>Endpoint specialized in returning a list of suggested skills based on input skills.<br>
+Based on an input list of skills, a list of related skills (suggestions) will be retrieved from MW.</p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
