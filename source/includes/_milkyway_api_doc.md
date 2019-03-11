@@ -1,12 +1,25 @@
 # Milkyway API
 
+Help businesses and entities manage skills, suggestions and matches in one place. Milkyway API's can help manage multiple skills on multiple environments. You can also automate creating entities and link them to the Milkyway skills space enabling them to be used for matching.
+
+In Milkyway you connect entities with skills and perform actions like:
+  - Insert/Update an entity into Milkyway (link entity to skills space) | Once inserted, entity will be used for matching algorithm.
+  - Get suggestions of related skills for speciefied skills | Using complex network.
+  - Get autcomplete list of skills for specified prefix.
+  - Get matching entities for specified skills | Using complex network.
+
 ## Definition
 
-The goal of this page is to define the high level architecture of the Milkyway API that will allow matching agencies (called here entities) using Milkyway network.
+The goal of this page is to define the high level architecture of the Milkyway API that you can interact with.
+
+## Prerequisites
+
+To be defined...
 
 <!-- POPULATE ENDPOINT DOC -->
-## **Populate endpoint** 
-**Create new entity with skills on a specific environment**
+For example, insert or update a new Entity with skills on a specifict environment with a PUT:
+## **Populate endpoint**
+
 
 <aside class="warning">
 Bearer token needed for authentification!
@@ -18,8 +31,8 @@ Bearer token needed for authentification!
 curl --header "Content-Type: application/json" \
  --header "Authorization: Bearer <ACCESS_TOKEN>"\
  --request PUT \
- --data '{"skills":["design", "frontend development", "angularJS", "reactJS", "html", "css", "web-development"]}' \
- http://milkyway.sortlist.com/v1/<environment>/entities/<entity-id>
+ --data '{"skills": ["<SKILL_1>", "<SKILL_2>", "<SKILL_3>", "<SKILL_4>", "<SKILL_5>", "<SKILL_6>", "<SKILL_7>"]}' \
+ http://milkyway.sortlist.com/v1/<ENVIRONMENT>/entities/<ENTITY_ID>
 ```
 >The above command returns JSON structured like this:
 
@@ -28,17 +41,18 @@ curl --header "Content-Type: application/json" \
   {
    "id": "entity-id",
    "skills": [
-       "design",
-       "frontend-development",
-       "angularJS",
-       "reactJS",
-       "html",
-       "css",
-       "web-development"
+       "<SKILL_1>",
+       "<SKILL_2>",
+       "<SKILL_3>",
+       "<SKILL_4>",
+       "<SKILL_5>",
+       "<SKILL_6>",
+       "<SKILL_7>"
     ]
   }
 ]
 ```
+All the skills that do not have a value or whose length is larger than 100 characters will be ignored.
 
 ### Http Request
 
@@ -62,7 +76,7 @@ Argument | Necessary | Type | Description
 **`id`** | `no` | `string` | `ID (slug) of the entity`
 **`skills`** | `yes` | `list(string)` | `List of entity's skills`
 ### Description
-Endpoint specialized in adding a new agency (entity) in the Milkyway API's database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.  
+Endpoint specialized in adding a new agency (entity) in the Milkyway API's database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.
 For each skill (input skill) from the list given in the request's body:
 
 * Create a new entry (entry_id, environment, entity_skill) in table `mw_entity_skills`:
@@ -83,7 +97,7 @@ This entry represents the **link between an entity and its entity skill**.
 This entry represents the **link between a entity skill and a milkyway skill**.
 
 <!-- MATCHING ENDPOINT DOC -->
-## **Matching endpoint** 
+## **Matching endpoint**
 
 <aside class="warning">
 Bearer token needed for authentification!
@@ -95,7 +109,7 @@ Bearer token needed for authentification!
 curl --header "Content-Type: application/json" \
  --header "Authorization: Bearer <ACCESS_TOKEN>"\
  --request GET \
- http://milkyway.sortlist.com/v1/<environment>/matches?skills[]=<skill_1>&skills[]=<skill_2>
+ http://milkyway.sortlist.com/v1/<ENVIRONMENT>/matches?skills[]=<SKILL_1>&skills[]=<SKILL_2>
 ```
 >The above command returns JSON structured like this:
 
@@ -130,50 +144,50 @@ Query parameter | Necessary | Type | Description
 
 
 ### Description
-Endpoint specialized in matching input skills with entities that exists in Milkyway API™ DB. A list of entities will be returned containing entity’s id and a matching score. 
+Endpoint specialized in matching input skills with entities that exists in Milkyway API™ DB. A list of entities will be returned containing entity’s id and a matching score.
 
 
 **Steps:**
 
-* Retrieve a skeleton from MW using list of N input skills (query params)  
+* Retrieve a skeleton from MW using list of N input skills (query params)
 
-> SKELETON STRUCTURE  
+> SKELETON STRUCTURE
 
 ```shell
 [
-  <PARENT NODE NAME FOR SKILL_1>: {   
-    'level_1': [  
-      { 'name': <milkyway skill>  
-        'seachable_name': <milkyway skill>  
-        'agencies': []  
+  <PARENT NODE NAME FOR SKILL_1>: {
+    'level_1': [
+      { 'name': <milkyway skill>
+        'seachable_name': <milkyway skill>
+        'agencies': []
       }
       ...
-    ], 
-    'level_2': [  
-      { 'name': <milkyway skill> 
+    ],
+    'level_2': [
+      { 'name': <milkyway skill>
         'seachable_name': <milkyway skill>
-        'agencies': []  
-      }  
-      ...  
+        'agencies': []
+      }
+      ...
     ]
   }
 
   ...
 
   <PARENT NODE NAME FOR SKILL_N>:{
-    'level_1': [  
-      { 'name': <milkyway skill>  
-        'seachable_name': <milkyway skill>  
-        'agencies': []  
+    'level_1': [
+      { 'name': <milkyway skill>
+        'seachable_name': <milkyway skill>
+        'agencies': []
       }
       ...
-    ], 
-    'level_2': [  
-      { 'name': <milkyway skill> 
+    ],
+    'level_2': [
+      { 'name': <milkyway skill>
         'seachable_name': <milkyway skill>
-        'agencies': []  
-      }  
-      ...  
+        'agencies': []
+      }
+      ...
     ]
   }
 ]
@@ -181,7 +195,7 @@ Endpoint specialized in matching input skills with entities that exists in Milky
 
 * The skeleton represents the relevant skills space for the input skills.
     1. On the first level (`level_1`), there are milkyway skills that could represent an exact match to the input skill.
-    2. On the second level (`level_2`), there are closest milkyway skills in the skills space related to the input skill.  
+    2. On the second level (`level_2`), there are closest milkyway skills in the skills space related to the input skill.
 <br>
 * As the network does not know the entities that have one skill or another, skeleton needs to be fulfilled with entities. For each milkyway skill in the skeleton, entities will be retrieved from milkyway database.
     1. With one milkyway skill, more entity skills will be retrieved using db translations. Then, for each entity skill, entities will be retrieved and added to the skeleton.
