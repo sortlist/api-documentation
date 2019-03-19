@@ -17,7 +17,7 @@ The goal of this page is to define the high level architecture of the Milkyway A
 To be defined...
 
 <!-- POPULATE ENDPOINT DOC -->
-For example, insert or update a new Entity with skills on a specifict environment with a PUT:
+For example, insert or update a new Entity with skills on a specific environment with a PUT:
 ## **Populate endpoint**
 
 
@@ -79,7 +79,7 @@ Argument | Necessary | Type | Description
 Endpoint specialized in adding a new agency (entity) in the Milkyway API's database, which will make the entity and the skills available for matching, auto-complete and auto-suggestion.
 For each skill (input skill) from the list given in the request's body:
 
-* Create a new entry (entry_id, environment, entity_skill) in table `mw_entity_skills`:
+* Create a new entry `(entity_id, environment, entity_skill)` in table `mw_entity_skills`:
   1. **entity_id** : slug of the entity
   2. **environment** : staging/prod/dev
   3. **entity_skill** : is computed by replacing the whitespaces of an input skill with dash (as an internal normalization)
@@ -252,11 +252,11 @@ Parameter | Necessary | Type | Description
 Query parameter | Necessary | Default value | Type | Description |
 --------- | -------- | ------------- | ------- | -----------
 **`prefix`** | `yes` | `-` | `string` | `Prefix string for searched skills.`
-**`limit`** | `no` | `10` | `int` | `Prefix string for searched skills.`
+**`limit`** | `no` | `10` | `int` | `Number of skills retrieved.`
 
 ### Description
 
-Endpoint specialized in returning milkyway skills starting with a prefix.  
+Endpoint specialized in returning milkyway skills starting with a prefix.
 All the skill nodes will be retrieved from MW and only those starting with the specified query param prefix will be returned.
 
 
@@ -316,5 +316,5 @@ Query parameter | Necessary | Default value | Type | Description |
 
 ### Description
 
-Endpoint specialized in returning a list of suggested skills based on input skills.  
+Endpoint specialized in returning a list of suggested skills based on input skills.
 Based on an input list of skills, a list of related skills (suggestions) will be retrieved from MW.
